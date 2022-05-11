@@ -1,0 +1,22 @@
+public with sharing class caseUpdateCTRL {
+
+    @AuraEnabled(cacheable=true)
+    public static List<Case> getContacts() {
+       return [SELECT id, CaseNumber, AccountId, ContactId, Subject, Reason, Status, Origin FROM CASE ];
+    }
+
+    @AuraEnabled
+public static string updateContacts(Object data) {
+    List<Case> contactsForUpdate = (List<Case>) JSON.deserialize(
+         JSON.serialize(data),
+         List<Case>.class
+    );
+    try {
+        update contactsForUpdate;
+        return 'Success: contacts updated successfully';
+    }
+    catch (Exception e) {
+        return 'The following exception has occurred: ' + e.getMessage();
+    }
+}
+}

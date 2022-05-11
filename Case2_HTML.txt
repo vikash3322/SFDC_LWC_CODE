@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title="Case Records" icon-name="custom:custom63">
+        <div class="slds-m-around_medium">
+            <template if:true={CaseR.data}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={CaseR.data}
+                    columns={columns}
+                    onsave={handleSave}
+                    draft-values={draftValues}>
+                </lightning-datatable>
+            </template>
+            <template if:true={contact.error}>
+                <!-- handle Apex error -->
+            </template>
+        </div>
+    </lightning-card>
+</template>
